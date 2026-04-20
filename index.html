@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WS SoftApps — Mobile Apps for Everyday Life</title>
+  <meta name="description" content="WS SoftApps builds simple, smart mobile apps to help people manage their daily lives better." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --teal: #0D9E91;
+      --teal-light: #90CEC9;
+      --teal-dark: #066057;
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --muted: #666;
+      --card-bg: #f7fafa;
+      --border: #e0efed;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 90px 5% 70px;
+      background: linear-gradient(160deg, #f0fafa 0%, #ffffff 60%);
+    }
+    .hero-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--teal-light), var(--teal));
+      border-radius: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(13,158,145,0.25);
+    }
+    .hero-icon svg { width: 44px; height: 44px; fill: white; }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--teal-dark);
+      margin-bottom: 14px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 30px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    /* ── SECTION ── */
+    section { padding: 70px 5%; max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--teal-dark);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .about-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 22px;
+    }
+    .about-card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+    .about-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+    }
+    .about-card p { font-size: 0.88rem; color: var(--muted); }
+
+    /* ── APPS ── */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 26px;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .app-card:hover {
+      box-shadow: 0 10px 32px rgba(13,158,145,0.12);
+      transform: translateY(-3px);
+    }
+    .app-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--teal-light), var(--teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.6rem;
+    }
+    .app-meta h3 { font-size: 1.1rem; font-weight: 700; color: var(--teal-dark); }
+    .app-meta span {
+      font-size: 0.78rem;
+      color: var(--teal);
+      background: rgba(13,158,145,0.1);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .app-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 18px; line-height: 1.6; }
+    .app-features { list-style: none; margin-bottom: 22px; }
+    .app-features li {
+      font-size: 0.85rem;
+      color: var(--text);
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .app-features li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--teal-light);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .app-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--teal); color: white; }
+    .btn-outline {
+      border: 1.5px solid var(--teal);
+      color: var(--teal);
+      background: transparent;
+    }
+    .badge-soon {
+      font-size: 0.78rem;
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffc107;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    /* ── CONTACT ── */
+    .contact-box {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      color: white;
+    }
+    .contact-box h2 { font-size: 1.7rem; font-weight: 800; margin-bottom: 10px; }
+    .contact-box p { font-size: 0.97rem; opacity: 0.85; margin-bottom: 26px; }
+    .contact-email {
+      display: inline-block;
+      background: white;
+      color: var(--teal-dark);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .contact-email:hover { opacity: 0.9; }
+    .contact-info {
+      margin-top: 22px;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 30px 5%;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--teal); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .nav-links { display: none; }
+      .contact-box { padding: 36px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">WS SoftApps</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-icon">
+      <!-- Simple phone/app icon -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 1H7C5.34 1 4 2.34 4 4v16c0 1.66 1.34 3 3 3h10c1.66 0 3-1.34 3-3V4c0-1.66-1.34-3-3-3zm-5 20c-.83 0-1.5-.67-1.5-1.5S11.17 18 12 18s1.5.67 1.5 1.5S12.83 21 12 21zm5-4H7V4h10v13z"/>
+      </svg>
+    </div>
+    <h1>WS SoftApps</h1>
+    <p>We build simple, smart mobile apps that help people manage their everyday lives — healthier, safer, and more organized.</p>
+    <span class="hero-badge">Android Apps · Lebanon</span>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">Who We Are</div>
+    <h2 class="section-title">Built with care, designed for real people</h2>
+    <p class="section-sub">WS SoftApps is an independent mobile app studio based in Lebanon. We focus on practical apps that solve everyday problems — built with modern technology and a user-first approach.</p>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="icon">📱</div>
+        <h3>Android First</h3>
+        <p>All our apps are built natively for Android using the latest Jetpack Compose technology.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">🤖</div>
+        <h3>AI-Powered</h3>
+        <p>We integrate modern AI (Google Gemini) to make apps smarter and more helpful for users.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">🔒</div>
+        <h3>Privacy Focused</h3>
+        <p>User data stays on the device. We only use cloud services when strictly necessary.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">🌍</div>
+        <h3>Multi-Language</h3>
+        <p>Our apps support English, Arabic (RTL), and French — built for the MENA region and beyond.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPS -->
+  <section id="apps" style="background: #f7fafa; max-width: 100%; padding: 70px 5%;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div class="section-label">Our Apps</div>
+      <h2 class="section-title">What we've built</h2>
+      <p class="section-sub">Practical apps designed to make daily life easier and safer.</p>
+
+      <div class="apps-grid">
+
+        <!-- Adwiyati -->
+        <div class="app-card">
+          <div class="app-header">
+            <div class="app-icon">💊</div>
+            <div class="app-meta">
+              <h3>Adwiyati · أدويتي</h3>
+              <span>Android</span>
+            </div>
+          </div>
+          <p class="app-desc">
+            A smart medicine reminder app with AI-powered safety features. Helps patients and caregivers manage medications safely — with photo recognition, drug interaction alerts, and family notifications.
+          </p>
+          <ul class="app-features">
+            <li>Photo recognition — scan medicine box with camera</li>
+            <li>AI drug interaction checker (Gemini AI)</li>
+            <li>Flexible reminders: daily, weekly, as-needed</li>
+            <li>Family WhatsApp/SMS alerts for missed doses</li>
+            <li>Full Arabic (RTL), English, and French support</li>
+          </ul>
+          <div class="app-links">
+            <span class="badge-soon">Coming to Google Play</span>
+          </div>
+        </div>
+
+        <!-- GoFetch -->
+        <div class="app-card">
+          <div class="app-header">
+            <div class="app-icon">🐾</div>
+            <div class="app-meta">
+              <h3>GoFetch</h3>
+              <span>Android</span>
+            </div>
+          </div>
+          <p class="app-desc">
+            A smart pet care companion app that helps pet owners manage their pets' health, schedule vet appointments, and track daily routines — all in one place.
+          </p>
+          <ul class="app-features">
+            <li>Pet health tracking and reminders</li>
+            <li>Vet appointment scheduling</li>
+            <li>Daily feeding and activity logs</li>
+            <li>Multi-pet support</li>
+          </ul>
+          <div class="app-links">
+            <span class="badge-soon">In Development</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-box">
+      <h2>Get in Touch</h2>
+      <p>Questions about our apps, partnerships, or feedback? We'd love to hear from you.</p>
+      <a class="contact-email" href="mailto:wssoftapps@gmail.com">wssoftapps@gmail.com</a>
+      <p class="contact-info">WS SoftApps · Ballounch, Kesserwan · Lebanon</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 WS SoftApps · Lebanon &nbsp;|&nbsp;
+      <a href="https://wssoftapps.github.io/privacy/privacy_policy_adwiyati.html">Privacy Policy</a>
+    </p>
+  </footer>
+
+</body>
+</html>
